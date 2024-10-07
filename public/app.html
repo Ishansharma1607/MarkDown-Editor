@@ -24,23 +24,18 @@
       </div>
     </form>
   </div>
-  <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
-  <script>
-    async function loadText() {
-      const response = await fetch('/load-text');
-      const text = await response.text();
-      ClassicEditor
-        .create(document.querySelector('#textArea'))
-        .then(editor => {
-          editor.setData(text);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    }
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+  async function loadText() {
+    const response = await fetch('/load-text');
+    const text = await response.text();
+    const simplemde = new SimpleMDE({ element: document.getElementById("textArea") });
+    simplemde.value(text);
+  }
 
-    window.onload = loadText;
-  </script>
+  window.onload = loadText;
+</script>
 </body>
 </html>
 
